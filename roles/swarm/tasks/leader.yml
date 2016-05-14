@@ -13,3 +13,10 @@
     name: swarm-leader
     enabled: yes
     state: restarted
+
+# https://github.com/docker/docker/issues/17902
+- name: start nginx-mantlui
+  sudo: yes
+  service:
+    name: nginx-mantlui
+    state: started

@@ -3,12 +3,7 @@ dependencies:
   - role: handlers
 
   - role: certificates
-    cert_options:
-      dns: "{{ ansible_hostname }}" # <short_name>-control-01, etc.
-      ip: "{{ [ public_ipv4, private_ipv4, ansible_ssh_host ] | unique | join(' ') }}"
-      location: "{{ ansible_hostname }}" # Openssl's "CN" ("Common Name")
-      destination: /etc/pki/swarm
-      prefix: swarm
+    cert_options: "{{ swarm_cert_options }}"
 
   # Open the Docker API to the network.
   - role: docker

@@ -10,6 +10,20 @@ swarm_ca_cert: /etc/pki/CA/ca.cert
 swarm_cert: /etc/pki/swarm/swarm.cert
 swarm_key: /etc/pki/swarm/swarm.key
 
+# Options passed to certificates role. See roles/certificates/README.rst
+swarm_cert_options:
+  country: ""      # Default: US
+  state: ""        # Default: New York
+  locality: ""     # Default: Anytown
+  organization: "" # Default: Example Company Inc
+  unit: ""         # Default: Operations
+  email: ""        # Default: operations@example.com
+  dns: "{{ ansible_hostname }}" # <short_name>-control-01, etc.
+  ip: "{{ [ public_ipv4, private_ipv4, ansible_ssh_host ] | unique | join(' ') }}"
+  location: "{{ ansible_hostname }}" # Openssl's "CN" ("Common Name")
+  destination: /etc/pki/swarm
+  prefix: swarm
+
 # For using Consul as a discovery backend, with TLS enabled.
 consul_ca_cert: /etc/pki/CA/ca.cert
 consul_cert: /etc/pki/tls/certs/host.cert

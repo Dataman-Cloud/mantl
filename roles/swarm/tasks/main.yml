@@ -4,3 +4,10 @@
 
 - include: agent.yml
   when: swarm_role == "worker"
+
+# https://github.com/docker/docker/issues/17902
+- name: start nginx-consul
+  sudo: yes
+  service:
+    name: nginx-consul
+    state: started
